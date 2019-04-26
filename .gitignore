@@ -1,0 +1,54 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+py3270/__init__.pyc
+.idea/
+
+*.pyc
+.DS_Store
+
+
+# Drop private include to prevent accidental inclusion
+#
+inc/private_includes.py
+
+## dont upload binaries to github
+#
+#lin_Binaries MAC_Binaries
+lin_Binaries 
+MAC_Binaries
+
+
+# project output 
+
+*.html
+*/*.html
+cics
+app
+user
+login

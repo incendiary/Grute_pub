@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<data>
+
+
+    <application>
+        <string>DC900004 ERROR TRANSACTION CODE NOT ACCEPTABLE. PLEASE RE-TYPE</string>
+        <type>app_error</type>
+        <xpos>1</xpos>
+        <ypos>24</ypos>
+    </application>
+    <application>
+        <string>Security Violation</string>
+        <type>app_auth</type>
+        <xpos>28</xpos>
+        <ypos>5</ypos>
+    </application>
+    <application>
+        <!--Dummy value at the mo, maybe check for validity -->
+        <string>app_unknown</string>
+        <type>app_unknown</type>
+        <xpos>1</xpos>
+        <ypos>1</ypos>
+    </application>
+
+
+    <cics>
+        <string>DFHAC2001</string>
+        <type>cics_error</type>
+        <xpos>2</xpos>
+        <ypos>23</ypos>
+        <eypos>23</eypos>
+        <expos>54</expos>
+    </cics>
+    <cics>
+        <string>DFHAC2033</string>
+        <type>cics_auth</type>
+        <xpos>2</xpos>
+        <ypos>23</ypos>
+        <eypos>23</eypos>
+        <expos>72</expos>
+    </cics>
+        <account>
+        <user>uid1</user>
+        <password>password1</password>
+    </account>
+    <account>
+        <user>uid2</user>
+        <password>password2</password>
+    </account>
+    <account>
+        <user>uid3</user>
+        <password>password3</password>
+    </account>
+
+    <username_login_field_location>
+        <xpos>1</xpos>
+        <ypos>1</ypos>
+    </username_login_field_location>
+
+    <!--Used for username enumeration in responses-->
+
+    <username_response>
+        <type>user_invalid</type>
+        <string>ICH408I</string>
+        <xpos>1</xpos>
+        <ypos>1</ypos>
+    </username_response>
+    <username_response>
+        <type>user_valid</type>
+        <string>PASSWORD</string>
+        <xpos>1</xpos>
+        <ypos>1</ypos>
+    </username_response>
+
+    <!-- default used normally, use env switch to use the non default -->
+    <!-- positions reset to 1,1 in published, dont think they are secret, but may need tuning anyway -->
+    <environment>
+        <name>enviroment1</name>
+        <value>StringToUseThisEnviroment</value>
+        <default>true</default>
+        <ypos>1</ypos>
+        <xpos>1</xpos>
+    </environment>
+    <environment>
+        <name>enviroment2</name>
+        <value>StringToUseThisEnviroment</value>
+        <default>false</default>
+        <ypos>1</ypos>
+        <xpos>1</xpos>
+    </environment>
+
+    <overtype>
+        <!-- Overtype string for comparision check -->
+        <name>User_in_login</name>
+        <value>ABCD</value>
+        <ypos>1</ypos>
+        <xpos>1</xpos>
+    </overtype>
+
+
+    <region_login_position>
+        <!-- used if you need to select a region to use an app-->
+        <name>Testing region 1</name>
+        <ypos>1</ypos>
+        <xpos>1</xpos>
+    </region_login_position>
+</data>
