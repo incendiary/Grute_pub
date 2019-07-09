@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<data>
+    <application>
+        <string>DC900004 ERROR TRANSACTION CODE NOT ACCEPTABLE. PLEASE RE-TYPE</string>
+        <type>app_error</type>
+        <xpos>1</xpos>
+        <ypos>24</ypos>
+    </application>
+    <application>
+        <string>Security Violation</string>
+        <type>app_auth</type>
+        <xpos>28</xpos>
+        <ypos>5</ypos>
+    </application>
+    <cics>
+        <string>DFHAC2001</string>
+        <type>cics_error</type>
+        <xpos>2</xpos>
+        <ypos>23</ypos>
+        <eypos>23</eypos>
+        <expos>54</expos>
+    </cics>
+    <cics>
+        <string>DFHAC2033</string>
+        <type>cics_auth</type>
+        <xpos>2</xpos>
+        <ypos>23</ypos>
+        <eypos>23</eypos>
+        <expos>72</expos>
+    </cics>
+    <account>
+        <user>uid1</user>
+        <password>password1</password>
+    </account>
+    <account>
+        <user>uid2</user>
+        <password>password2</password>
+    </account>
+    <account>
+        <user>uid3</user>
+        <password>password3</password>
+    </account>
+    <account>
+    <bad_application_codes>
+        <code>aaa</code>
+        <code>abc</code>
+    </bad_application_codes>
+</data>

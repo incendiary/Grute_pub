@@ -144,6 +144,9 @@ def do_setup():
 
     # Custom Testing
 
+    parser.add_argument('-dept', '--department', help="department scraping, Bool", default=False, type=str2bool)
+
+
     args = parser.parse_args()
 
     if args.populate_cics or args.populate_apps or args.populate_users or args.bulk_auth_create or args.excel:

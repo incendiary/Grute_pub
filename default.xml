@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <data>
-
-
     <application>
         <string>DC900004 ERROR TRANSACTION CODE NOT ACCEPTABLE. PLEASE RE-TYPE</string>
         <type>app_error</type>
@@ -13,6 +11,12 @@
         <type>app_auth</type>
         <xpos>28</xpos>
         <ypos>5</ypos>
+    </application>
+    <application>
+        <string>SECURITY VIOLATION</string>
+        <type>app_auth</type>
+        <xpos>20</xpos>
+        <ypos>2</ypos>
     </application>
     <application>
         <!--Dummy value at the mo, maybe check for validity -->
@@ -39,69 +43,64 @@
         <eypos>23</eypos>
         <expos>72</expos>
     </cics>
-        <account>
-        <user>uid1</user>
-        <password>password1</password>
+    <account>
+        <user>uat4</user>
+        <password>13qeadzc</password>
     </account>
     <account>
-        <user>uid2</user>
-        <password>password2</password>
+        <user>uat5</user>
+        <password>13qeadzc</password>
+    </account>
+
+    <account>
+        <user>uat6</user>
+        <password>13qeadzc</password>
     </account>
     <account>
-        <user>uid3</user>
-        <password>password3</password>
+        <user>uat7</user>
+        <password>13qeadzc</password>
     </account>
 
     <username_login_field_location>
-        <xpos>1</xpos>
-        <ypos>1</ypos>
+        <xpos>17</xpos>
+        <ypos>15</ypos>
     </username_login_field_location>
-
-    <!--Used for username enumeration in responses-->
-
     <username_response>
         <type>user_invalid</type>
         <string>ICH408I</string>
-        <xpos>1</xpos>
-        <ypos>1</ypos>
+        <xpos>2</xpos>
+        <ypos>22</ypos>
     </username_response>
     <username_response>
         <type>user_valid</type>
         <string>PASSWORD</string>
-        <xpos>1</xpos>
-        <ypos>1</ypos>
+        <xpos>2</xpos>
+        <ypos>22</ypos>
     </username_response>
-
-    <!-- default used normally, use env switch to use the non default -->
-    <!-- positions reset to 1,1 in published, dont think they are secret, but may need tuning anyway -->
     <environment>
-        <name>enviroment1</name>
-        <value>StringToUseThisEnviroment</value>
+        <name>crest</name>
+        <value>P</value>
         <default>true</default>
-        <ypos>1</ypos>
-        <xpos>1</xpos>
+        <ypos>21</ypos>
+        <xpos>45</xpos>
     </environment>
     <environment>
-        <name>enviroment2</name>
-        <value>StringToUseThisEnviroment</value>
+        <name>travel</name>
+        <value>T</value>
         <default>false</default>
-        <ypos>1</ypos>
-        <xpos>1</xpos>
+        <ypos>21</ypos>
+        <xpos>45</xpos>
     </environment>
-
     <overtype>
         <!-- Overtype string for comparision check -->
         <name>User_in_login</name>
-        <value>ABCD</value>
-        <ypos>1</ypos>
-        <xpos>1</xpos>
+        <value>SDSB</value>
+        <ypos>20</ypos>
+        <xpos>75</xpos>
     </overtype>
-
-
     <region_login_position>
-        <!-- used if you need to select a region to use an app-->
         <name>Testing region 1</name>
-        <ypos>1</ypos>
-        <xpos>1</xpos>
+        <ypos>18</ypos>
+        <xpos>04</xpos>
     </region_login_position>
 </data>

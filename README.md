@@ -2,12 +2,6 @@
 
 Grute - aims to help with the heavy lifting of green screen, mainframe applications accessible via tn3270,  testing.  It is unlikely to work out of the box for you, and requires tuning for individual apps and enviroments.  Grute can do simple automation testing to do things taken for granted in other protocols (http).  Namely, enumeration, authentication testing, etc.  It started life as a branch of MFscreen which SoF wrote.  Variables and data should ideally live in the config xml file.  Grute makes use of rabbitmq to do some parrelised assessments.  ie, if you can open 10 connection from your system, you can run 10 instances of grute.
 
-
-Sensitive operations can be described  inc/private_includes.py with dummy / default ones in inc/public_includes.py.  private includes are not checked in using .gitignore.
-
-You will likely need to tune grute alot for individual enviroments, I've tried to use oop and repeatable actions where possible to automate the less interesting tasks.  
-
-
 EG:
 ```
 for i in {1..1000}

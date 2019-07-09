@@ -62,6 +62,7 @@ class MainFrame:
         self.transaction_codes = []
         self.disclosed_accounts = []
         self.disclosed_priv_accounts = []
+        self.disclosed_dept = []
 
         self.region_login_position = None
         self.channel = None
@@ -681,6 +682,96 @@ class MainFrame:
         else:
             return True
 
+    def get_department(self):
+        self.em.send_string('zss')
+        self.em.wait_for_field()
+        self.em.send_enter()
+        self.em.wait_for_field()
+        self.em.send_string('1')
+        self.em.send_enter()
+
+
+        char_set = 'abcdefghijklmnopqrstuvwxyz0123456789'
+
+        for positionone in char_set:
+            for positiontwo in char_set:
+                string = positionone + positiontwo
+                screen("Testing %s" % string, type="info" )
+                self.em.send_string(string, 4, 23)
+                self.em.send_enter()
+                should_continue = True
+                if self.check_screen_for_string("DEPARTMENT ID NOT FOUND"):
+                    self.save_screen_specific('dept/nonexist/' + string + ".html")
+                    should_continue = False
+                else:
+                    self.search_user_info()
+                    self.save_screen_specific('dept/' + string + ".html")
+                i = 1
+                if should_continue:
+                    while self.check_screen_for_string("NO MORE DATA TO DISPLAY") is False:
+                        self.em.send_pf8()
+
+                        self.save_screen_specific('dept/' + string + ".html")
+                        self.save_screen_specific('dept/' + string + "_%s" % str(i) + ".html")
+                        self.search_user_info()
+
+                        i += 1
+
+        self.return_user_info_results()
+
+    def search_user_info(self):
+        ##
+        #  Searches the screen for user info
+        ##
+        data_list = self.em.screen_get()
+
+        if len(data_list[3][29:31].strip()) > 0:
+            # we have an entry in the department line
+            dept = data_list[3][29:80].strip()
+            if dept not in self.disclosed_dept:
+                screen("Dept: %s" % data_list[3][29:80].strip(), type="debug", level=2)
+                self.disclosed_dept.append(dept)
+
+        if len(data_list[4][22:26].replace(" ", "")) == 4:
+            # Entry on the manager line
+            code = data_list[4][22:26]
+            name = data_list[4][29:80].strip()
+            user = {'code': code, 'name': name}
+            screen("user: %s" % str(user), type="debug", level=2)
+            if user not in self.disclosed_priv_accounts:
+                self.disclosed_priv_accounts.append(user)
+                screen("priv: %s" % str(user), type="debug", level=2)
+
+        users_area =[data_list[x:x + 1] for x in xrange(9, 19, 1)]
+        for line in users_area:
+
+            if len(line[0][19:23].replace(" ", "")) == 4:
+                code = line[0][19:23].strip()
+                name = line[0][27:80].strip()
+                user = {'code': code, 'name': name}
+                screen("user: %s" % str(user), type="debug", level=2)
+                if user not in self.disclosed_accounts:
+                    self.disclosed_accounts.append(user)
+                    screen("user: %s" % str(user), type="debug", level=2)
+
+    def return_user_info_results(self):
+        departments = [self.disclosed_dept[x:x + 5] for x in xrange(0, len(self.disclosed_dept), 5)]
+        priv_users = [self.disclosed_priv_accounts[x:x + 5] for x in xrange(0, len(self.disclosed_priv_accounts), 5)]
+        users = [self.disclosed_accounts[x:x + 5] for x in xrange(0, len(self.disclosed_accounts), 5)]
+
+        screen("Departments: count %s" % len(self.disclosed_dept), type="info", level=1)
+        for department in departments:
+            screen(str(department), type="info", level=2)
+
+        screen("Priv Users: count %s" % len(self.disclosed_priv_accounts), type="info", level=1)
+        for priv_user in self.disclosed_priv_accounts:
+
+            screen("U| C:%s| Ac:%s" %(priv_user['code'], priv_user['name']), type="info", level=2)
+
+        screen("Users: count %s" % len(self.disclosed_accounts), type="info", level=1)
+        for user in self.disclosed_accounts:
+            screen("U| C:%s| Ac:%s" % (user['code'], user['name']), type="info", level=2)
+
     def count_occurances_in_screen(self, string):
         ##
         # Counts the number of occurances of a string on a screen
@@ -737,8 +828,6 @@ class MainFrame:
 
 
 def main():
-    # The below is a bit messy, but proceduarlly shows how things can be done.  Will tidy next opportunity i get
-    # to test breaking changes.
 
     args = do_setup()
     app_list_dict = read_xml(args.config, 'application')
@@ -917,6 +1006,25 @@ def main():
             screen("Should be in App", type="info")
             target.check_application(app_list_dict)
             target.terminate()
+
+    if args.department:
+        if target.connect_to_zos():
+            screen("[Enviroment] %s" % target.environment, type="debug")
+            screen("Connected", type="info")
+            if args.overtype:
+                target.set_overtype(overtype_list_dict)
+            target.wait_for_field_and_screenshot()
+            target.vtam_login()
+            target.save_screen_normal()
+            target.set_region(region_login_position_list_dict)
+            target.login_to_region()
+            time.sleep(args.sleep)
+            target.login_to_app()
+            time.sleep(args.sleep)
+            target.save_screen_normal()
+            time.sleep(args.sleep)
+            screen("Should be in App", type="info")
+            target.get_department()
 
     if args.cemt_trans:
         cics_list_dict = read_xml(args.config, 'cics')
